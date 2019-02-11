@@ -1,0 +1,76 @@
+# qt5ct
+1. add `export QT_QPA_PLATFORMTHEME=qt5ct` to /etc/environment (with sudo)
+2. add (export QT_QPA_PLATFORMTHEME=qt5ct)
+3. open qt5ct, choose Appearance -> Style -> gtk2
+4. choose icon theme
+5. reboot
+
+# gestures
+1. yaourt -S xdotool wmctrl libinput-gestures
+2. sudo usermod -aG input <user>
+3. nano ~/.config/libinput-gestures.conf
+   gesture: swipe left  3 xdotool key super+Tab
+   gesture: swipe right 3 xdotool key super+q
+5. libinput-gestures-setup start
+
+# pamac
+1. hide tray icon when no update available
+2. enable support for AUR
+
+# vscode
+1. syncing
+
+# network
+# downgrade NetworkManager
+sudo pacman -U https://archive.archlinux.org/packages/n/networkmanager/networkmanager-1.10.10-1-x86_64.pkg.tar.xz
+# Enable easy NetworkManager local DNS caching
+1. Install dnsmasq:
+	sudo pacman -S dnsmasq
+2. Add the following dns= line to /etc/NetworkManager/NetworkManager.conf:
+	[main]
+	plugins=ifcfg-rh,ibft
+	dns=dnsmasq
+
+  [device]
+  wifi.scan-rand-mac-address=no
+  wifi.powersave=2
+3. Add some extra space to the default cache:
+	echo "cache-size=1000" >> /etc/NetworkManager/dnsmasq.d/cache.conf
+4. Restart NetworkManager:
+	sudo systemctl restart NetworkManager
+
+sudo nano /etc/modprobe.d/rtl8723be.conf
+options rtl8723be fwlps=0 ips=0 swlps=0 ant_sel=1
+
+sudo nano /etc/modprobe.d/iwlwifi.conf
+options iwlwifi bt_coex_active=0 power_save=0 11n_disable=8
+
+modinfo iwlwifi
+systool -v -m iwlwifi
+
+# max watchers
+echo fs.inotify.max_user_watches=524288 | sudo tee /etc/sysctl.d/40-max-user-watches.conf && sudo sysctl --system
+
+# downgrade zoom
+1. yaourt -S soom
+2. edit PKBUILD
+pkgver=2.1.103753.0521
+sha512sums=('1b6b0d1f38c5cf51de534e7ea5a5d8309934652f5adad824baee951c5bfa14553bffaf805f36077796c9462d77c985754227afd56cfec800e3866dec0ed4d614')
+
+# GTK3
+sudo pacman -U https://archive.archlinux.org/packages/g/gtk3/gtk3-3.22.9-1-x86_64.pkg.tar.xz
+
+# Compton
+sudo pacman -U https://archive.archlinux.org/packages/c/compton/compton-2.0-2-x86_64.pkg.tar.xz
+
+
+# swapfile
+sudo fallocate -l 1Gb /swapfile
+for F2FS or XFS: sudo dd if=/dev/zero of=/swapfile bs=1M count=512
+
+sudo chmod 600 /swapfile
+
+sudo mkswap /swapfile
+
+sudo nano /etc/fstab
+/swapfile none swap defaults 0 0
