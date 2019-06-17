@@ -1,0 +1,112 @@
+1. Mount the filesystems to the /mnt folder.
+  # list of disks
+  fdisk -l
+
+  mount /dev/sda1 /mnt
+  
+  # create the nested folder
+  mkdir /mnt/data /mnt/boot
+
+  mount /dev/sda1 /mnt/boot
+  mount /dev/sda3 /mnt/data
+
+2. alpine-setup
+  2.1. Select keyboard layout: us
+  2.2. Available variants: us
+
+  2.3. Enter system hostname: nas
+
+  2.4. Available interfaces: eth0
+  2.5. Ip address for eth0?: dhcp
+
+  2.6. Do you want to do any manual configuration?: no
+  2.7. Changing password for root
+
+  2.7. Which timezone are for you in?: Europe
+  2.8. Which sub-timezone of Europe are you in?: Kiev
+
+  2.9. HTTP/FTP proxy URL?: none
+  2.10. Enter mirror number or URL to add?: f
+
+  2.11. Which SSH server?: openssh
+
+  2.12. Which NTP client to run? chrony
+
+  2.13. Enter where to store configs: none
+  2.14. Enter apk cache directory: none
+
+3. setup-disk -m sys /mnt
+
+4. umount /mnt/data /mnt/boot/efi /mnt
+
+5. reboot
+
+6. log in as root
+
+7. apk add vim
+
+8. repositories 
+  vim /etc/apk/repositories
+  uncomment community repositories, update release version
+
+  apk add --upgrade apk-tools
+
+  apk upgrade --available && sync
+
+  cat /etc/alpine-release
+
+9. swapfile
+  fallocate -l 2G /swapfile
+  chmod 600 /swapfile
+  mkswap /swapfile
+
+  echo -e '/swapfile none swap sw 0 0' >> /etc/fstab
+  
+  rc-service swap start
+  rc-update add swap
+
+10. sudo
+  apk add sudo bash
+  sudo visudo
+
+  # uncomment line
+  # %wheel ALL=(ALL) ALL
+
+11. add user
+  adduser -G wheel -s /bin/bash someuser
+
+
+tips
+1. change shell
+  vim /etc/passwd
+
+apk add htop
+apk add zsh zsh-autosuggestions zsh-syntax-highlighting bind-tools
+
+
+
+*
+* rutorrent has been installed to:                    
+*     /usr/share/webapps/rutorrent                    
+* If you use lighttpd:                                
+* 1 - enable mod_scgi in lighttpd.conf adding:        
+*          server.modules += ( mod_scgi )           
+* 2 - touch /etc/lighttpd/mod_scgi.conf               
+* 3 - add the following entry in mod_scgi.conf:       
+* scgi.server =(                                      
+*        /RPC1 =>                                   
+*                ( 127.0.0.1 =>                     
+*                         (                           
+*                         host => 127.0.0.1,      
+*                         port => 5000,             
+*                         check-local => disable  
+*                         )                           
+*                 )                                   
+*         )                                           
+* 4 - (optional) Add lighttpd to rutorrent group      
+* to give to webserver r/w permissions on rutorrent   
+* share folder (/usr/share/webapps/rutorrent/share):  
+* addgroup lighttpd rutorrent 	                    
+*
+
+

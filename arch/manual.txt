@@ -74,3 +74,13 @@ sudo mkswap /swapfile
 
 sudo nano /etc/fstab
 /swapfile none swap defaults 0 0
+
+https://wiki.archlinux.org/index.php/intel_graphics#Tearing
+
+/etc/X11/xorg.conf.d/20-intel.conf
+
+Section "Device"
+  Identifier  "Intel Graphics"
+  Driver      "intel"
+  Option      "TearFree" "true"
+EndSection

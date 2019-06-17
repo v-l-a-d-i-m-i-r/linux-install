@@ -1,0 +1,39 @@
+sudo pacman -Syu $(pacman -Qnq) - reinstall all packages
+paccache -rk 0 - clear cache
+pacman -Rns $(pacman -Qtdq) - remove orphans packages
+
+
+
+
+
+There are many reasons why I (and everyone) prefer Arch Linux over other Linux distributions. It is a rolling release, so you will always have the last version of your applications. And, other notable reasons are Pacman, Arch User Repository (AUR), and Arch Wiki. As you may already know, Pacman is the simple and powerful package manager for Arch Linux and its derivatives. Arch Wiki doesn’t need any introduction. It is an incredible documentation site, contributed by well-experienced users, where you can find ton of guides, tips and tricks etc. And, finally the AUR or Arch User Repository. In this repository, almost every piece of software that runs on Linux is available. It is the largest repository maintained by trusted users from all over the world. You don’t have to deal with PPAs or a ton of third-party repositories. You can easily install any software from AUR using helper programs such as Yay. If you use AUR regularly, I’ve got a good news for you. You can speed up the compilation process when installing packages from AUR. Read on.
+
+Speed Up Compilation Process When Installing Packages From AUR
+You need to install ccache package first. For those wondering, ccache is a fast c/c++ compiler which is used to speed up the compilation process. It speeds up recompilation by caching previous compilations and detecting when the same compilation is being done again. It supports C, C++, Objective-C and Objective-C++.
+
+ccache is available in the default repositories. All you have to do is:
+
+$ sudo pacman -S ccache
+After installing ccache, edit /etc/makepkg.conf file:
+
+$ sudo vi /etc/makepkg.conf
+Find and uncomment ccache from the following line (remove the exclamation mark) to enable caching.
+
+BUILDENV=(fakeroot !distcc color ccache check !sign)
+Then uncomment and edit the MAKEFLAGS value to reflect your CPU threads. Say for example, if your CPU has 8 threads (4 cores), then update the value as shown below:
+
+MAKEFLAGS="-j8"
+Save and close the file.
+
+Note: To know how to find the number of CPU cores in your system, refer this link.
+
+Then, edit your bashrc file:
+
+$ vi ~/.bashrc
+Add the following line to enable for command line compilations:
+
+export PATH="/usr/lib/ccache/bin/:$PATH"
+Finally, update the changes using command:
+
+$ source ~/.bashrc
+Save and close the file. Now, you will notice the difference while compiling packages from AUR. Please note that ccache may take a few seconds longer to compile a program the first time, but the subsequent compiles will be much faster.
