@@ -1,16 +1,17 @@
+0. log in as root
 1. Mount the filesystems to the /mnt folder.
   # list of disks
   fdisk -l
 
   mount /dev/sda1 /mnt
-  
+
   # create the nested folder
   mkdir /mnt/data /mnt/boot
 
   mount /dev/sda1 /mnt/boot
   mount /dev/sda3 /mnt/data
 
-2. alpine-setup
+2. setup-alpine
   2.1. Select keyboard layout: us
   2.2. Available variants: us
 
@@ -43,9 +44,9 @@
 
 6. log in as root
 
-7. apk add vim
+7. apk add vim git
 
-8. repositories 
+8. repositories
   vim /etc/apk/repositories
   uncomment community repositories, update release version
 
@@ -61,7 +62,7 @@
   mkswap /swapfile
 
   echo -e '/swapfile none swap sw 0 0' >> /etc/fstab
-  
+
   rc-service swap start
   rc-update add swap
 
@@ -80,33 +81,18 @@ tips
 1. change shell
   vim /etc/passwd
 
-apk add htop
 apk add zsh zsh-autosuggestions zsh-syntax-highlighting bind-tools
 
 
+# SSH
+/etc/ssh/sshd_config:
 
-*
-* rutorrent has been installed to:                    
-*     /usr/share/webapps/rutorrent                    
-* If you use lighttpd:                                
-* 1 - enable mod_scgi in lighttpd.conf adding:        
-*          server.modules += ( mod_scgi )           
-* 2 - touch /etc/lighttpd/mod_scgi.conf               
-* 3 - add the following entry in mod_scgi.conf:       
-* scgi.server =(                                      
-*        /RPC1 =>                                   
-*                ( 127.0.0.1 =>                     
-*                         (                           
-*                         host => 127.0.0.1,      
-*                         port => 5000,             
-*                         check-local => disable  
-*                         )                           
-*                 )                                   
-*         )                                           
-* 4 - (optional) Add lighttpd to rutorrent group      
-* to give to webserver r/w permissions on rutorrent   
-* share folder (/usr/share/webapps/rutorrent/share):  
-* addgroup lighttpd rutorrent 	                    
-*
+To enable password authentication, uncomment
+#PasswordAuthentication yes
 
+To enable root login, uncomment
+#PermitRootLogin yes
 
+To enable ssh key login, uncomment
+#PubkeyAuthentication yes
+#AuthorizedKeysFile .ssh/authorized_keys
