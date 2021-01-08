@@ -84,3 +84,5 @@ Section "Device"
   Driver      "intel"
   Option      "TearFree" "true"
 EndSection
+
+youtube-dl -f bestaudio --extract-audio --audio-format flac --add-metadata -o '%(title)s.%(ext)s' https://youtu.be/RM7K_WwCnSw

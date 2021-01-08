@@ -13,33 +13,40 @@ function pacman_install() {
   sudo pacman -S $@ --noconfirm
 }
 
+function aur_install() {
+  pamac install $@ --no-confirm
+}
+
 ## Text editors
 pacman_install mousepad gedit
-yaourt_install visual-studio-code-bin
+aur_install visual-studio-code-bin
+
+## Engrampa
+pacman_install engrampa
 
 ## Browsers
-pacman_install opera
-yaourt_install google-chrome
+pacman_install opera falkon
+aur_install google-chrome
 
 ## Messangers
-yaourt_install zoom
-# yaourt_install skypeforlinux-stable-bin
+# aur_install zoom
+# aur_install skypeforlinux-stable-bin
 
 ## REST clients
-# yaourt_install postman-bin
-yaourt_install insomnia
+# aur_install postman-bin
+aur_install insomnia
 
 ## Mongodb clients
-yaourt_install mongodb-compass
-# yaourt_install mongoclient
+# aur_install mongodb-compass robo3t-bin
+# aur_install mongoclient
 # sudo ln -s /usr/bin/Nosqlclient /opt/mongoclient/Nosqlclient
 
 ## Mongodb
 # pacman_install mongodb
-pacman_install mongodb-tools
+# pacman_install mongodb-tools
 
-## Shutter
-yaourt_install shutter
+## Flameshot
+aur_install flameshot
 
 ## Docker
 pacman_install docker docker-compose
