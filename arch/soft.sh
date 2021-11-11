@@ -5,16 +5,12 @@ set -ex
 ## Update the packages
 sudo pacman -Syyu --noconfirm
 
-function yaourt_install() {
-  yaourt -S $@ --noconfirm
-}
-
 function pacman_install() {
-  sudo pacman -S $@ --noconfirm
+  sudo pacman -S $@ --noconfirm --needed
 }
 
 function aur_install() {
-  pamac install $@ --no-confirm
+  yaourt -S $@ --noconfirm --needed
 }
 
 ## Text editors

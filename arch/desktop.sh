@@ -12,16 +12,12 @@ sudo reflector --verbose --latest 100 --sort rate --save /etc/pacman.d/mirrorlis
 ## Update the packages
 sudo pacman -Syyu --noconfirm
 
-function yaourt_install() {
-  yaourt -S $@ --noconfirm
-}
-
 function aur_install() {
-  pamac install $@ --no-confirm
+  yaourt -S $@ --noconfirm --needed
 }
 
 function pacman_install() {
-  sudo pacman -S $@ --noconfirm
+  sudo pacman -S $@ --noconfirm --needed
 }
 
 ## Xorg server
@@ -50,7 +46,8 @@ pacman_install git
 
 ## Utils
 pacman_install gvfs polkit-gnome gnome-keyring gparted ntfs-3g xfce4-power-manager htop conky arandr xcompmgr nitrogen gsimplecal gvfs-mtp gvfs-gphoto2 bind-tools pacman-contrib lm_sensors seahorse
-aur_install qxkb nvm grub-customizer jmtpfs
+aur_install nvm grub-customizer jmtpfs
+aur_install gxkb
 
 ## Notifications
 pacman_install xfce4-notifyd

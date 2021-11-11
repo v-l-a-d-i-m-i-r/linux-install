@@ -42,10 +42,10 @@ Install Arch linux under Manjaro
   mount /dev/sda2 /mnt/boot/efi
 
 5. Instal the base packages
-  pacstrap /mnt base base-devel
+  pacstrap /mnt base base-devel linux linux-headers
 
   # For lts kernel
-  pacstrap /mnt $(pacman -Sqg base | sed 's/^\(linux\)$/\1-lts/') linux-lts-headers base-devel
+  pacstrap /mnt base base-devel linux-lts linux-lts-headers
 
 6. Generate the fstab file
   genfstab -pU /mnt >> /mnt/etc/fstab
@@ -66,10 +66,10 @@ Install Arch linux under Manjaro
     ln -sf /usr/share/zoneinfo/Europe/Kiev /etc/localtime
 
   7.3 Generate locales
-    # set the usa locale 
+    # set the usa locale
     sed -i 's/^#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
 
-    # set the rus locale 
+    # set the rus locale
     sed -i 's/^#ru_RU.UTF-8/ru_RU.UTF-8/' /etc/locale.gen
 
     # check the result
@@ -80,15 +80,15 @@ Install Arch linux under Manjaro
 
   7.4 Set the system language
     echo "LANG=\"en_US.UTF-8\"" > /etc/locale.conf
- 
-  7.5 Set the console keymap 
+
+  7.5 Set the console keymap
     echo -e "KEYMAP=us\nFONT=cyr-sun16" > /etc/vconsole.conf
 
   7.6 Set the hostname (e.g my-pc)
     echo "my-pc" > /etc/hostname
-  
+
   7.7 Se the users and passwords
-    #set the password for root 
+    #set the password for root
     passwd
 
     # set the other user (e.g. someuser)
@@ -96,21 +96,15 @@ Install Arch linux under Manjaro
 
     # set the password for other user (e.g. someuser)
     passwd someuser
-  
+
   7.8 Patch the sudoers file
     sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
 
-  7.9 Create RAM image
-    mkinitcpio -p linux
-
-    # For lts kernel
-    mkinitcpio -p linux-lts
-
-  7.10 Install and configure GRUB
+  7.9 Install and configure GRUB
     pacman -S --noconfirm grub (for all types)
 
     # BIOS (only)
-    grub-install /dev/sdx 
+    grub-install /dev/sdx
 
     # UEFI (only)
     pacman -S --noconfirm efibootmgr
@@ -118,9 +112,9 @@ Install Arch linux under Manjaro
 
     grub-mkconfig -o /boot/grub/grub.cfg (for all types)
 
-  7.11 Install and configure the network utils (for using run wifi-menu)
+  7.10 Install and configure the network utils (for using run wifi-menu)
     # wireless utils (for using run wifi-menu)
-    pacman -S --noconfirm netctl dialog wpa_supplicant
+    pacman -S --noconfirm netctl dialog dhcpcd wpa_supplicant
 
     # for using run wifi connection
     sudo wifi-menu
@@ -128,11 +122,11 @@ Install Arch linux under Manjaro
     # for using run wire connection
     sudo systemctl start dhcpcd
 
-  7.12 Clean pacman cache
+  7.11 Clean pacman cache
     pacman -S --noconfirm pacman-contrib
     paccache -rk 0
 
-  7.13 Exit from arch-chroot mode
+  7.12 Exit from arch-chroot mode
     exit
 
 8. Unmount the filesystems from the /mnt folder
