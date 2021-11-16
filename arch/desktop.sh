@@ -6,7 +6,7 @@ set -ex
 sudo pacman -Sy --noconfirm
 
 ## Mirrorlists
-sudo pacman -S --noconfirm reflector
+sudo pacman -S --noconfirm reflector --needed
 sudo reflector --verbose --latest 100 --sort rate --save /etc/pacman.d/mirrorlist
 
 ## Update the packages
@@ -53,7 +53,7 @@ aur_install gxkb
 pacman_install xfce4-notifyd
 
 ## Appearance
-pacman_install lxappearance qt5ct qt5-styleplugins
+aur_install lxappearance qt5ct qt5-styleplugins
 
 ## Theme
 pacman_install gnome-themes-extra

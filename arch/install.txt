@@ -6,7 +6,7 @@ Install Arch linux under Manjaro
 
 1. Patch the mirrorlist file
   # fetch the list of servers
-  curl https://www.archlinux.org/mirrorlist/all/ > /etc/pacman.d/mirrorlist
+  curl -L https://www.archlinux.org/mirrorlist/all/ > /etc/pacman.d/mirrorlist
 
   # check that file /etc/pacman.d/mirrorlist was updated successfully
   nano /etc/pacman.d/mirrorlist
