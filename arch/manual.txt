@@ -86,3 +86,7 @@ Section "Device"
 EndSection
 
 youtube-dl -f bestaudio --extract-audio --audio-format flac --add-metadata -o '%(title)s.%(ext)s' https://youtu.be/RM7K_WwCnSw
+
+
+# Lenovo s10-3 wifi speed
+ sudo pacman -S broadcom-wl-dkms
