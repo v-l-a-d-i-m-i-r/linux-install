@@ -46,6 +46,9 @@ aur_install flameshot
 
 ## Docker
 pacman_install docker docker-compose
+
+## Players
+aur_install vlc qmplay2
 # sudo groupadd docker
 sudo gpasswd -a ${USER} docker
 sudo systemctl enable docker

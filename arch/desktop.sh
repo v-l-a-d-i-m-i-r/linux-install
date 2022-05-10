@@ -44,6 +44,9 @@ pacman_install doublecmd-gtk2 pcmanfm
 ## Source control
 pacman_install git
 
+## Neovim
+pacman_inatall neovim neovim-plug fd ripgrep typescript typescript-language-server lua-language-server bash-language-server
+aur_install vscode-langservers-extracted	
 ## Utils
 pacman_install gvfs polkit-gnome gnome-keyring gparted ntfs-3g xfce4-power-manager htop conky arandr xcompmgr nitrogen gsimplecal gvfs-mtp gvfs-gphoto2 bind-tools pacman-contrib lm_sensors seahorse
 aur_install nvm grub-customizer jmtpfs
