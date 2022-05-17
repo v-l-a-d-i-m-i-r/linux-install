@@ -92,7 +92,7 @@ aur_install rxvt-unicode-truecolor
 
 ## Fonts
 pacman_install ttf-dejavu
-aur_install ttf-font-awesome-4 otf-san-francisco
+aur_install nerd-fonts-dejavu-complete
 
 ## Images
 pacman_install gwenview
