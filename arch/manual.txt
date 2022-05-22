@@ -90,3 +90,6 @@ youtube-dl -f bestaudio --extract-audio --audio-format flac --add-metadata -o '%
 
 # Lenovo s10-3 wifi speed
  sudo pacman -S broadcom-wl-dkms
+
+==> ERROR: One or more PGP signatures could not be verified!
+https://superuser.com/questions/1210758/error-one-or-more-pgp-signatures-could-not-be-verified-arch-linux

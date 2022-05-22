@@ -45,8 +45,22 @@ pacman_install doublecmd-gtk2 pcmanfm lf
 pacman_install git
 
 ## Neovim
-pacman_inatall neovim neovim-plug fd ripgrep typescript typescript-language-server lua-language-server bash-language-server
-aur_install vscode-langservers-extracted watchman-bin
+pacman_install neovim
+pacman_install neovim-plug
+### Dependencies
+pacman_install python
+pacman_install python-pip
+aur_install    watchman-bin
+### LSP servers
+pacman_install typescript-language-server
+pacman_install lua-language-server
+pacman_install bash-language-server
+aur_install    vscode-langservers-extracted
+### Providers
+python3 -m pip install --user --upgrade pynvim
+pacman_install cpanminus
+cpanm -n Neovim::Ext
+
 ## Utils
 pacman_install gvfs polkit-gnome gnome-keyring gparted ntfs-3g xfce4-power-manager htop conky arandr xcompmgr nitrogen gsimplecal gvfs-mtp gvfs-gphoto2 bind-tools pacman-contrib lm_sensors seahorse
 aur_install nvm grub-customizer jmtpfs
@@ -98,7 +112,7 @@ aur_install nerd-fonts-dejavu-complete
 pacman_install gwenview
 
 ## Cli tools replacements
-pacman_install lsd bat
+pacman_install lsd bat fd ripgrep
 
 ## Enable Network Manager daemon
 sudo systemctl enable NetworkManager
