@@ -39,7 +39,7 @@ aur_install pa-applet-git
 pacman_install xf86-input-synaptics
 
 ## Commanders
-pacman_install doublecmd-gtk2 pcmanfm
+pacman_install doublecmd-gtk2 pcmanfm lf
 
 ## Source control
 pacman_install git
@@ -96,6 +96,9 @@ aur_install nerd-fonts-dejavu-complete
 
 ## Images
 pacman_install gwenview
+
+## Cli tools replacements
+pacman_install lsd bat
 
 ## Enable Network Manager daemon
 sudo systemctl enable NetworkManager
