@@ -52,10 +52,10 @@ pacman_install python
 pacman_install python-pip
 aur_install    watchman-bin
 ### LSP servers
-pacman_install typescript-language-server
-pacman_install lua-language-server
-pacman_install bash-language-server
-aur_install    vscode-langservers-extracted
+# pacman_install typescript-language-server
+# pacman_install lua-language-server
+# pacman_install bash-language-server
+# aur_install    vscode-langservers-extracted
 ### Providers
 python3 -m pip install --user --upgrade pynvim
 pacman_install cpanminus
@@ -112,7 +112,7 @@ aur_install nerd-fonts-dejavu-complete
 pacman_install gwenview
 
 ## Cli tools replacements
-pacman_install lsd bat fd ripgrep
+pacman_install lsd bat fd ripgrep zoxide
 
 ## Enable Network Manager daemon
 sudo systemctl enable NetworkManager
