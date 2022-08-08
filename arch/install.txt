@@ -42,10 +42,10 @@ Install Arch linux under Manjaro
   mount /dev/sda2 /mnt/boot/efi
 
 5. Instal the base packages
-  pacstrap /mnt base base-devel linux linux-headers
+  pacstrap /mnt base base-devel linux linux-headers linux-firmware
 
   # For lts kernel
-  pacstrap /mnt base base-devel linux-lts linux-lts-headers
+  pacstrap /mnt base base-devel linux-lts linux-lts-headers linux-firmware
 
 6. Generate the fstab file
   genfstab -pU /mnt >> /mnt/etc/fstab
@@ -99,6 +99,7 @@ Install Arch linux under Manjaro
 
   7.8 Patch the sudoers file
     sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
+    sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 
   7.9 Install and configure GRUB
     pacman -S --noconfirm grub (for all types)
@@ -114,7 +115,7 @@ Install Arch linux under Manjaro
 
   7.10 Install and configure the network utils (for using run wifi-menu)
     # wireless utils (for using run wifi-menu)
-    pacman -S --noconfirm netctl dialog dhcpcd wpa_supplicant
+    pacman -S --noconfirm iw inetutils netctl dialog dhcpcd wpa_supplicant
 
     # for using run wifi connection
     sudo wifi-menu

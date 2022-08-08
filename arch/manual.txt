@@ -27,15 +27,16 @@ sudo pacman -U https://archive.archlinux.org/packages/n/networkmanager/networkma
 1. Install dnsmasq:
 	sudo pacman -S dnsmasq
 2. Add the following dns= line to /etc/NetworkManager/NetworkManager.conf:
-	[main]
-	plugins=ifcfg-rh,ibft
-	dns=dnsmasq
+  [main]
+  plugins=ifcfg-rh,ibft
+  dns=dnsmasq
 
   [device]
   wifi.scan-rand-mac-address=no
   wifi.powersave=2
-3. Add some extra space to the default cache:
-	echo "cache-size=1000" >> /etc/NetworkManager/dnsmasq.d/cache.conf
+3. Add some extra space to the default cache /etc/NetworkManager/dnsmasq.d/cache.conf:
+  cache-size=1000
+  no-negcache
 4. Restart NetworkManager:
 	sudo systemctl restart NetworkManager
 
