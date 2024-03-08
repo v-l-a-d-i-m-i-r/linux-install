@@ -94,3 +94,15 @@ youtube-dl -f bestaudio --extract-audio --audio-format flac --add-metadata -o '%
 
 ==> ERROR: One or more PGP signatures could not be verified!
 https://superuser.com/questions/1210758/error-one-or-more-pgp-signatures-could-not-be-verified-arch-linux
+
+# Microsoft Teams
+1. Install `teams` (not `teams-for-linux`) AUR package
+2. Install Redirector Chrome extention https://chromewebstore.google.com/detail/redirector/ocgpenflpmgnfapjedencafcfakcekcd
+3. Setup Redirector: 
+Description:MS teams
+Example URL:https://teams.microsoft.com/*
+Include pattern:https://teams.microsoft.com/(.*)
+Redirect to:msteams://teams.microsoft.com/$1
+Pattern type: Regular Expression
+Pattern Description: msteams://teams.microsoft.com/*
+4. For more details see https://github.com/IsmaelMartinez/teams-for-linux/issues/1098
